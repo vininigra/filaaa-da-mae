@@ -1,0 +1,27 @@
+.custom-block2 {}
+
+.field-nome {
+    border-bottom: 2px solid #e74c3c;
+}
+
+.field-quantidade input {
+    /* Estilos para o campo 'quantidade' */
+}
+
+.field-validade input {
+    /* Estilos para o campo 'validade' */
+}
+
+.field-value-no-border {
+    /* Estilos específicos para o campo 'nome' sem borda e com cor de fundo */
+    border: none;
+    /* Remove a borda */
+    background-color: rgb(171, 164, 164);
+    /* Adicione a cor de fundo desejada */
+    padding: 5px;
+    /* Adicione preenchimento conforme necessário */
+}
+
+.buttoncad {
+    margin-top: -0.25rem !important;
+}

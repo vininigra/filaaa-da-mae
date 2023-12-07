@@ -1,0 +1,89 @@
+
+Ordena de forma crescente do maior para a maior data de vencimento, da data atual de hoje
+
+
+db.Produtos.aggregate([
+  {
+    $addFields: {
+      diasAteVencimento: {
+        $floor: {
+          $divide: [
+            { $subtract: ["$validade", new Date()] },
+            1000 * 60 * 60 * 24  // Converte a diferença de milissegundos para dias
+          ]
+        }
+      }
+    }
+  },
+  {
+    $sort: {
+      diasAteVencimento: 1  // Ordena em ordem crescente de dias até o vencimento
+    }
+  }
+])
+
+Ordena de forma Decrescente do maior para a maior data de vencimento, da data atual de hoje
+db.Produtos.aggregate([
+  {
+    $addFields: {
+      diasAteVencimento: {
+        $floor: {
+          $divide: [
+            { $subtract: ["$validade", new Date()] },
+            1000 * 60 * 60 * 24  // Converte a diferença de milissegundos para dias
+          ]
+        }
+      }
+    }
+  },
+  {
+    $sort: {
+      diasAteVencimento: -1  // Ordena em ordem decrescente de dias até o vencimento
+    }
+  }
+])
+
+
+Ordena somente um dia antes do vencimento da date de hoje(exemplo hoje dia 03 so vai mostrar o do dia 04)
+
+db.Produtos.aggregate([
+  {
+    $addFields: {
+      diasAteVencimento: {
+        $floor: {
+          $divide: [
+            { $subtract: ["$validade", new Date()] },
+            1000 * 60 * 60 * 24  // Converte a diferença de milissegundos para dias
+          ]
+        }
+      }
+    }
+  },
+  {
+    $match: {
+      diasAteVencimento: 1  // Filtra apenas os produtos que vencem hoje
+    }
+  },
+  {
+    $sort: {
+      diasAteVencimento: 1  // Ordena em ordem crescente de dias até o vencimento
+    }
+  }
+])
+
+ordena a maior somente o produto com maior quantidade
+db.Produtos.find().sort({ quantidade: -1 }).limit(1)
+
+ordena a menor somente o produto com maior quantidade
+db.Produtos.find({ quantidade: 1 }).sort({ quantidade: 1 }).limit(1)
+
+ordena todos os produtos com a quantidade igual a 1
+db.Produtos.find({ quantidade: 1 }).sort({ quantidade: 1 })
+
+ordena somente a data mais proxima do vencimento 
+db.Produtos.find({ "validade": { $gte: new Date() } }, { "_id": 0, "validade": 1 })
+  .sort({ "validade": 1 })
+  .limit(1)
+
+
+

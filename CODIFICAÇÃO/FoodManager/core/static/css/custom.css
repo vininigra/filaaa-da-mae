@@ -1,0 +1,21 @@
+.profile-image {
+  border-radius: var(--border-radius-small);
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.alin-dir {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.mainwr {
+  margin-top: 80px;
+  /* ajuste conforme necessário */
+}
+
+.mg-top {
+  margin-top: 50px;
+  margin-left: 10px;
+}
